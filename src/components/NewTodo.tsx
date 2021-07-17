@@ -1,21 +1,12 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState} from 'react';
 import {Text, View, TouchableOpacity, TextInput} from 'react-native';
+import {useAppDispatch} from '../app/hook';
+import {addTodo} from '../actions/todoAction';
 
-import {useDispatch} from 'react-redux';
-import {Dispatch} from 'redux';
-
-interface newTodoProps {
-  onAddTodo: (todo: Todo) => void;
-}
-
-const NewTodo: React.FC<newTodoProps> = props => {
+const NewTodo: React.FC = () => {
   const [txtInput, setTxtInput] = useState<string>('');
 
-  const dispatch: Dispatch<any> = useDispatch();
-  const addTodoHandler = useCallback(
-    (todo: Todo) => dispatch(props.onAddTodo(todo)),
-    [dispatch, props],
-  );
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -25,7 +16,7 @@ const NewTodo: React.FC<newTodoProps> = props => {
       </View>
       <TouchableOpacity
         onPress={() =>
-          addTodoHandler({id: Math.random().toString(), text: txtInput})
+          dispatch(addTodo({id: Math.random().toString(), text: txtInput}))
         }>
         <Text>Add TODO</Text>
       </TouchableOpacity>

@@ -1,29 +1,21 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {Dispatch} from 'redux';
+import {useAppSelector, useAppDispatch} from '../app/hook';
+import {deleteTodo} from '../actions/todoAction';
 
-interface TodoListProps {
-  items: Todo[];
-  onDeleteTodo: (deleteTodo: Todo) => void;
-}
-
-const TodoList: React.FC<TodoListProps> = props => {
-  const dispatch: Dispatch<any> = useDispatch();
-  const deleteTodoHandler = useCallback(
-    (todo: Todo) => dispatch(props.onDeleteTodo(todo)),
-    [dispatch, props],
-  );
+const TodoList: React.FC = () => {
+  const todos = useAppSelector(state => state.TodoReducer.todos);
+  const dispatch = useAppDispatch();
 
   return (
     <FlatList
-      data={props.items}
+      data={todos}
       keyExtractor={todo => todo.id}
       renderItem={({item}) => {
         return (
           <View style={styles.todoContainer}>
             <Text>{item.text}</Text>
-            <TouchableOpacity onPress={deleteTodoHandler.bind(null, item)}>
+            <TouchableOpacity onPress={() => dispatch(deleteTodo(item))}>
               <Text>DELETE</Text>
             </TouchableOpacity>
           </View>

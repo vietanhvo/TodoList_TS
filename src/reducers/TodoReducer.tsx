@@ -1,4 +1,5 @@
 import * as actionType from '../actions/actionTypes';
+import {AnyAction} from 'redux';
 
 const initialState: TodoState = {
   todos: [],
@@ -6,7 +7,7 @@ const initialState: TodoState = {
 
 const reducer = (
   state: TodoState = initialState,
-  action: TodoAction,
+  action: AnyAction,
 ): TodoState => {
   switch (action.type) {
     case actionType.ADD_TODO:
