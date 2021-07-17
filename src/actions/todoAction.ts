@@ -24,7 +24,9 @@ export function dispatchAction(action: TodoAction) {
   // We use dispatchAction here to handle data send or receive with server
   // In this case, this function is redundant. However, this is worth to
   // dispatch function like this in many cases.
-  return (dispath: DispatchType) => {
-    dispath(action);
+  return (dispatch: DispatchType) => {
+    setTimeout(() => {
+      dispatch(action);
+    }, 500);
   };
 }
