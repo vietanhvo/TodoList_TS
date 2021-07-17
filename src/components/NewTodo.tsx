@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, View, TouchableOpacity, TextInput} from 'react-native';
 import {useAppDispatch} from '../app/hook';
-import {addTodo} from '../actions/todoAction';
+import {actionTypes} from '../actions/actionTypes';
 
 const NewTodo: React.FC = () => {
   const [txtInput, setTxtInput] = useState<string>('');
@@ -16,7 +16,10 @@ const NewTodo: React.FC = () => {
       </View>
       <TouchableOpacity
         onPress={() =>
-          dispatch(addTodo({id: Math.random().toString(), text: txtInput}))
+          dispatch({
+            type: actionTypes.ADD_TODO,
+            payload: {id: Math.random().toString(), text: txtInput},
+          })
         }>
         <Text>Add TODO</Text>
       </TouchableOpacity>

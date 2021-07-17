@@ -1,4 +1,4 @@
-import * as actionTypes from './actionTypes';
+import {actionTypes} from './actionTypes';
 
 export function addTodo(payload: Todo) {
   const action: TodoAction = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {useAppSelector, useAppDispatch} from '../app/hook';
-import {deleteTodo} from '../actions/todoAction';
+import {actionTypes} from '../actions/actionTypes';
 
 const TodoList: React.FC = () => {
   const todos = useAppSelector(state => state.TodoReducer.todos);
@@ -15,7 +15,10 @@ const TodoList: React.FC = () => {
         return (
           <View style={styles.todoContainer}>
             <Text>{item.text}</Text>
-            <TouchableOpacity onPress={() => dispatch(deleteTodo(item))}>
+            <TouchableOpacity
+              onPress={() =>
+                dispatch({type: actionTypes.DELETE_TODO, payload: item})
+              }>
               <Text>DELETE</Text>
             </TouchableOpacity>
           </View>
