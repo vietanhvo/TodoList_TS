@@ -11,10 +11,11 @@ const reducer = (
   switch (action.type) {
     case actionType.ADD_TODO:
       const newTodo: Todo = {
-        id: Math.random().toString(),
+        id: action.payload.id,
         text: action.payload.text,
       };
 
+      console.log({...state, todos: state.todos.concat(newTodo)});
       return {...state, todos: state.todos.concat(newTodo)};
     case actionType.DELETE_TODO:
       const removedTodos: Todo[] = state.todos.filter(

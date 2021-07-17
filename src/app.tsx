@@ -4,13 +4,14 @@ import NewTodo from './components/NewTodo';
 import TodoList from './components/TodoList';
 
 import {Provider, useSelector, shallowEqual} from 'react-redux';
-import {createStore, Store} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 
 import reducer from './reducers';
 import {addTodo, deleteTodo} from './actions/todoAction';
 
 const App: React.FC = () => {
-  const store: Store<TodoState, TodoAction> = createStore(reducer);
+  const store = createStore(reducer, applyMiddleware(thunk));
 
   return (
     <Provider store={store}>

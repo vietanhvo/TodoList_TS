@@ -12,6 +12,6 @@ interface TodoAction {
   payload: Todo;
 }
 
-interface DispathType {
+interface DispatchType {
   (args: TodoAction): TodoAction;
 }

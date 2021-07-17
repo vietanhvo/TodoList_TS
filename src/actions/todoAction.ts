@@ -6,8 +6,8 @@ export function addTodo(payload: Todo) {
     payload,
   };
 
-  return action;
-  //dispathAction(action);
+  //return action;
+  return dispatchAction(action);
 }
 
 export function deleteTodo(payload: Todo) {
@@ -16,12 +16,15 @@ export function deleteTodo(payload: Todo) {
     payload,
   };
 
-  return action;
-  //dispathAction(action);
+  //return action;
+  return dispatchAction(action);
 }
 
-export function dispathAction(action: TodoAction) {
-  return (dispath: DispathType) => {
+export function dispatchAction(action: TodoAction) {
+  // We use dispatchAction here to handle data send or receive with server
+  // In this case, this function is redundant. However, this is worth to
+  // dispatch function like this in many cases.
+  return (dispath: DispatchType) => {
     dispath(action);
   };
 }
